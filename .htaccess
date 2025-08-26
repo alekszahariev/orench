@@ -1,0 +1,13 @@
+RewriteEngine On
+
+# Ако пътят е точно /bg, /en, /de, зареди index.html (без query string)
+RewriteCond %{REQUEST_URI} ^/(bg|en|de)/?$
+RewriteRule ^(bg|en|de)/?$ /index.html [L]
+
+# Разреши достъп до реални файлове и папки
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Всичко друго да минава през index.html
+RewriteRule ^.*$ /index.html [L,QSA]

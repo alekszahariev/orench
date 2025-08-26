@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-KF8XG2PT');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Проследи поръчката си</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* Base styling with improved aesthetics */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    :root {
+        --color-primary: #ea384c;
+        --color-primary-dark: #d01c31;
+        --color-primary-light: #ffebee;
+        --color-secondary: #f3f4f6;
+        --color-text: #1f2937;
+        --color-text-light: #6b7280;
+        --color-white: #ffffff;
+        --color-error: #ef4444;
+        --color-success: #10b981;
+        --color-border: #e5e7eb;
+        --border-radius: 10px;
+        --box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+        --transition: all 0.3s ease;
+    }
+
+    html, body {
+        overflow-x: hidden;
+        overflow-y: auto;
+        position: relative;
+    }
+
+    body {
+        font-family: 'Inter', sans-serif;
+        color: var(--color-text);
+        background-color: #f4f5f7;
+        line-height: 1.6;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+    }
+
+    .echantiya-tracking-container {
+        width: 100%;
+        max-width: 640px;
+        background-color: var(--color-white);
+        border-radius: var(--border-radius);
+        padding: 2.5rem 2rem;
+        box-shadow: var(--box-shadow);
+    }
+
+    .echantiya-tracking-header {
+        text-align: center;
+        margin-bottom: 2.5rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    .echantiya-tracking-header h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--color-text);
+        margin-bottom: 1rem;
+    }
+
+    .echantiya-tracking-header p {
+        color: var(--color-text-light);
+        font-size: 1.05rem;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .echantiya-tracking-form {
+        margin-bottom: 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        align-items: center;
+    }
+
+    .echantiya-tracking-form input[type="text"] {
+        width: 100%;
+        padding: 1rem;
+        border: 2px solid var(--color-border);
+        border-radius: var(--border-radius);
+        font-size: 1rem;
+        background-color: #f9fafb;
+        transition: var(--transition);
+        font-family: inherit;
+    }
+
+    .echantiya-tracking-form input[type="text"]:hover {
+        border-color: #cbd5e1;
+    }
+
+    .echantiya-tracking-form input[type="text"]:focus {
+        outline: none;
+        border-color: var(--color-primary);
+        box-shadow: 0 0 0 3px rgba(234, 56, 76, 0.15);
+        background-color: var(--color-white);
+    }
+
+    .echantiya-tracking-form button {
+        width: 100%;
+        padding: 1rem 2rem;
+        background: linear-gradient(to right, var(--color-primary), var(--color-primary-dark));
+        color: white;
+        border: none;
+        border-radius: var(--border-radius);
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: var(--transition);
+        box-shadow: 0 4px 15px rgba(234, 56, 76, 0.3);
+        letter-spacing: 0.3px;
+        min-width: 150px;
+    }
+
+    .echantiya-tracking-form button:hover:not(:disabled) {
+        background: linear-gradient(to right, var(--color-primary-dark), var(--color-primary-dark));
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(234, 56, 76, 0.4);
+    }
+
+    .echantiya-tracking-form button:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    .echantiya-tracking-status {
+        background-color: #f9fafb;
+        border: 2px solid var(--color-border);
+        border-radius: var(--border-radius);
+        padding: 2rem;
+        margin-bottom: 2rem;
+        transition: var(--transition);
+    }
+
+    .echantiya-tracking-status.success {
+        background-color: #c6f6d5;
+        border-color: #9ae6b4;
+    }
+
+    .echantiya-tracking-status.error {
+        background-color: #fed7d7;
+        border-color: #feb2b2;
+    }
+
+    .echantiya-tracking-status p {
+        margin-bottom: 1rem;
+        color: var(--color-text);
+        font-size: 1rem;
+    }
+
+    .echantiya-tracking-status p:last-child {
+        margin-bottom: 0;
+    }
+
+    .echantiya-tracking-status strong {
+        color: #1a202c;
+        font-weight: 600;
+    }
+
+    .order-image-container {
+        margin-top: 1.5rem;
+        text-align: center;
+    }
+
+    .order-image {
+        max-width: 100%;
+        max-height: 400px;
+        border-radius: var(--border-radius);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        margin-top: 1rem;
+    }
+
+    .echantiya-btn {
+        display: inline-block;
+        width: 100%;
+        padding: 1rem 2rem;
+        background: var(--color-secondary);
+        color: var(--color-text);
+        text-decoration: none;
+        border-radius: var(--border-radius);
+        font-weight: 600;
+        font-size: 1rem;
+        text-align: center;
+        transition: var(--transition);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .echantiya-btn:hover {
+        background-color: #e5e7eb;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+        text-decoration: none;
+        color: var(--color-text);
+    }
+
+    .loading {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 2px solid #ffffff40;
+        border-top: 2px solid #ffffff;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin-right: 8px;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    .success-text {
+        color: var(--color-success);
+    }
+
+    .error-text {
+        color: var(--color-error);
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+        .echantiya-tracking-container {
+            padding: 1.5rem 1rem;
+            margin: 0.5rem;
+        }
+        
+        .echantiya-tracking-header h1 {
+            font-size: 1.5rem;
+        }
+        
+        .echantiya-tracking-form {
+            gap: 1rem;
+        }
+    }
+
+    /* Animation for form transitions */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .fade-in {
+        animation: fadeIn 0.5s ease forwards;
+    }
+  </style>
+</head>
+<body>
+  <div class="echantiya-tracking-container">
+    <div class="echantiya-tracking-header">
+      <h1>Проследи поръчката си</h1>
+      <p>Въведи номера на поръчката, за да видиш нейния статус и генерираната снимка</p>
+    </div>
+
+    <form class="echantiya-tracking-form" onsubmit="return trackOrder(event)">
+      <input type="text" id="orderNumber" placeholder="напр. 123456789" required />
+      <button type="submit" id="submitBtn">Проследи</button>
+    </form>
+
+    <div class="echantiya-tracking-status" id="trackingStatus" style="display: none;">
+      <p><strong>Номер на поръчката:</strong> <span id="displayOrderNumber"></span></p>
+      <p><strong>Статус:</strong> <span id="orderStatus"></span></p>
+      <p><strong>Дата на поръчката:</strong> <span id="orderDate"></span></p>
+      <div id="orderImageContainer" class="order-image-container" style="display: none;">
+        <p><strong>Генерирана снимка:</strong></p>
+        <img id="orderImage" class="order-image" alt="Генерирана снимка за поръчката" />
+      </div>
+    </div>
+
+    <a href="https://www.enchantiya.com" class="echantiya-btn" id="backHome" style="display: none;">Обратно към началната страница</a>
+  </div>
+
+  <script>
+    const N8N_WEBHOOK_URL = 'https://primary-production-f22c.up.railway.app/webhook/71bcded9-a2b4-4bb9-8b17-95c36348b760';
+    
+    async function trackOrder(event) {
+      event.preventDefault();
+  
+      const orderId = document.getElementById('orderNumber').value.trim();
+      const statusEl = document.getElementById('trackingStatus');
+      const statusText = document.getElementById('orderStatus');
+      const orderNumberDisplay = document.getElementById('displayOrderNumber');
+      const orderDateDisplay = document.getElementById('orderDate');
+      const orderImageContainer = document.getElementById('orderImageContainer');
+      const orderImage = document.getElementById('orderImage');
+      const backHomeBtn = document.getElementById('backHome');
+      const submitBtn = document.getElementById('submitBtn');
+  
+      // Покажи loading състояние
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="loading"></span>Търсене...';
+      
+      // Изчисти предишни резултати
+      statusText.textContent = '';
+      statusText.className = '';
+      orderNumberDisplay.textContent = '';
+      orderDateDisplay.textContent = '';
+      statusEl.style.display = 'none';
+      statusEl.className = 'echantiya-tracking-status';
+      orderImageContainer.style.display = 'none';
+      backHomeBtn.style.display = 'none';
+  
+      try {
+        const response = await fetch(N8N_WEBHOOK_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ 
+            orderNumber: orderId,
+            action: 'track_order',
+            timestamp: new Date().toISOString()
+          })
+        });
+  
+        const data = await response.json();
+        console.log('Response data:', data); // За debug
+  
+        if (response.ok && (data.order || data.orderNumber)) {
+          // Получи данните от правилното място
+          const orderData = data.order || data;
+          
+          // Успешен отговор - показва данните
+          statusEl.classList.add('success');
+          orderNumberDisplay.textContent = orderData.orderNumber;
+          statusText.textContent = orderData.status || 'Не е посочен статус';
+          statusText.className = 'success-text';
+          orderDateDisplay.textContent = orderData.orderDate || 'Не е указана дата';
+          
+          // Покажи снимката ако е налична
+          if (orderData.imageUrl) {
+            orderImage.src = orderData.imageUrl;
+            // Покажи контейнера веднага, дори преди да се зареди снимката
+            orderImageContainer.style.display = 'block';
+            orderImage.onerror = function() {
+              orderImageContainer.innerHTML = '<p><strong>Снимка:</strong> <span class="error-text">Грешка при зареждане на снимката</span></p>';
+            };
+          }
+          
+        } else if (response.status === 404 || data.error) {
+          // Поръчката не е намерена или друга грешка
+          statusEl.classList.add('error');
+          statusText.textContent = data.error || 'Поръчката не е намерена в системата';
+          statusText.className = 'error-text';
+          orderNumberDisplay.textContent = orderId;
+          orderDateDisplay.textContent = 'Не е налична';
+          
+        } else {
+          // Неочакван отговор
+          statusEl.classList.add('error');
+          statusText.textContent = 'Неочакван отговор от сървъра';
+          statusText.className = 'error-text';
+          orderNumberDisplay.textContent = orderId;
+          orderDateDisplay.textContent = 'Не е налична';
+        }
+  
+        statusEl.style.display = 'block';
+        statusEl.classList.add('fade-in');
+        backHomeBtn.style.display = 'inline-block';
+        
+      } catch (err) {
+        console.error('Грешка при заявката:', err);
+        statusEl.classList.add('error');
+        statusText.textContent = 'Възникна грешка при връзка със сървъра. Моля опитайте отново.';
+        statusText.className = 'error-text';
+        orderNumberDisplay.textContent = orderId;
+        orderDateDisplay.textContent = 'Не е налична';
+        statusEl.style.display = 'block';
+        statusEl.classList.add('fade-in');
+        backHomeBtn.style.display = 'inline-block';
+      } finally {
+        // Възстанови бутона
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'Проследи';
+      }
+    }
+
+    // Добави enter key support
+    document.getElementById('orderNumber').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        trackOrder(e);
+      }
+    });
+  </script>
+</body>
+</html>

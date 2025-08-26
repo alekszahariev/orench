@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QDBQ7RMV6L"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QDBQ7RMV6L');
+</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KF8XG2PT');</script>
+    <!-- End Google Tag Manager -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Благодарим - Enchantiya</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+
+    <style>
+        :root {
+            --color-primary: #ea384c;
+            --color-primary-dark: #d01c31;
+            --color-primary-light: #ffebee;
+            --color-secondary: #f3f4f6;
+            --color-text: #1f2937;
+            --color-text-light: #6b7280;
+            --color-white: #ffffff;
+            --color-error: #ef4444;
+            --color-success: #10b981;
+            --color-border: #e5e7eb;
+            --color-form-step-active: #ea384c;
+            --color-form-step-completed: #10b981;
+            --color-form-step-inactive: #d1d5db;
+            --border-radius: 10px;
+            --box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s ease;
+            
+            /* Aliases for backward compatibility */
+            --color-primary-hover: var(--color-primary-dark);
+            --color-text-secondary: var(--color-text-light);
+            --color-background: var(--color-white);
+            --color-surface: var(--color-secondary);
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-lg: var(--box-shadow);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--color-secondary);
+            min-height: 100vh;
+            padding: 1rem;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--color-white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .form-header {
+            background: linear-gradient(135deg, #eb9545 0%, #ff001e 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .logo-container {
+            margin-bottom: 1rem;
+        }
+
+        .logo {
+            height: 60px;
+            width: auto;
+            border-radius: 8px;
+        }
+
+        .form-header h1 {
+            font-size: 1.875rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-header p {
+            font-size: 1.125rem;
+            opacity: 0.9;
+        }
+
+        .form-container {
+            padding: 2rem;
+        }
+
+        .submission-success {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .success-icon {
+            flex-shrink: 0;
+            color: var(--color-success);
+        }
+
+        .success-message h2 {
+            color: var(--color-text);
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .success-message p {
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .order-details {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .order-details h3 {
+            color: var(--color-text);
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .order-details ul {
+            list-style: none;
+        }
+
+        .order-details li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .order-details li span:first-child {
+            color: var(--color-success);
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        /* Survey Styles */
+        .survey-container {
+            padding: 2rem;
+            background: var(--color-white);
+            border-radius: var(--border-radius);
+            border: 1px solid var(--color-border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .survey-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-success));
+        }
+
+        .survey-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .survey-header h3 {
+            color: var(--color-text);
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .survey-header p {
+            color: var(--color-text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .survey-options {
+            display: grid;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (min-width: 769px) {
+            .survey-options {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+        }
+
+        .survey-option {
+            position: relative;
+        }
+
+        .survey-option input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .survey-option label {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: var(--color-white);
+            border: 2px solid var(--color-border);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+            color: var(--color-text);
+        }
+
+        .survey-option label:hover {
+            border-color: var(--color-primary);
+            background: var(--color-primary-light);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .survey-option input[type="radio"]:checked + label {
+            border-color: var(--color-primary);
+            background: var(--color-primary-light);
+            box-shadow: 0 0 0 3px rgba(234, 56, 76, 0.1);
+        }
+
+        .survey-option-icon {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--color-border);
+            border-radius: 50%;
+            position: relative;
+            flex-shrink: 0;
+            transition: var(--transition);
+        }
+
+        .survey-option input[type="radio"]:checked + label .survey-option-icon {
+            border-color: var(--color-primary);
+            background: var(--color-primary);
+        }
+
+        .survey-option input[type="radio"]:checked + label .survey-option-icon::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 6px;
+            height: 6px;
+            background: white;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .survey-other-container {
+            margin-top: 0.75rem;
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .survey-other-container.active {
+            opacity: 1;
+            max-height: 100px;
+        }
+
+        .survey-other-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--color-border);
+            border-radius: var(--border-radius);
+            font-family: inherit;
+            font-size: 0.875rem;
+            transition: border-color 0.2s ease;
+        }
+
+        .survey-other-input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(234, 56, 76, 0.1);
+        }
+
+        .survey-actions {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+        }
+
+        .survey-btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: var(--border-radius);
+            font-family: inherit;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.875rem;
+        }
+
+        .survey-btn-primary {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .survey-btn-primary:hover {
+            background: var(--color-primary-dark);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .survey-btn-secondary {
+            background: transparent;
+            color: var(--color-text-light);
+            border: 1px solid var(--color-border);
+        }
+
+        .survey-btn-secondary:hover {
+            background: var(--color-secondary);
+            color: var(--color-text);
+        }
+
+        .survey-thank-you {
+            display: none;
+        }
+
+        .form-navigation {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.875rem 2rem;
+            background: var(--color-primary);
+            color: white;
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: var(--color-primary-dark);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Hide thank you content initially */
+        .thank-you-content {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .thank-you-content.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Survey section styling when it's the main content */
+        .survey-section {
+            display: block;
+        }
+
+        .survey-section.hidden {
+            display: none;
+        }
+
+        /* Animations */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .survey-container {
+            animation: slideIn 0.5s ease both;
+        }
+
+        .thank-you-content.active {
+            animation: fadeIn 0.5s ease both;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            body {
+                padding: 0.5rem;
+            }
+
+            .container {
+                max-width: 100%;
+                margin: 0;
+            }
+
+            .form-header {
+                padding: 1.5rem 1rem;
+            }
+
+            .form-header h1 {
+                font-size: 1.5rem;
+            }
+
+            .form-header p {
+                font-size: 1rem;
+            }
+
+            .form-container {
+                padding: 1.5rem 1rem;
+            }
+
+            .survey-container {
+                padding: 1.5rem 1rem;
+            }
+
+            .survey-header h3 {
+                font-size: 1.125rem;
+            }
+
+            .survey-option label {
+                padding: 0.875rem;
+                font-size: 0.875rem;
+            }
+
+            .survey-actions {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .survey-btn {
+                width: 100%;
+                padding: 1rem;
+            }
+
+            .submission-success {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .order-details ul {
+                padding-left: 0;
+            }
+
+            .order-details li {
+                font-size: 0.875rem;
+                margin-bottom: 0.75rem;
+            }
+
+            .btn {
+                width: 100%;
+                padding: 1rem 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .form-header {
+                padding: 1rem;
+            }
+
+            .form-header h1 {
+                font-size: 1.25rem;
+            }
+
+            .logo {
+                height: 50px;
+            }
+
+            .form-container {
+                padding: 1rem;
+            }
+
+            .survey-container {
+                padding: 1rem;
+            }
+
+            .survey-option label {
+                padding: 0.75rem;
+                gap: 0.5rem;
+            }
+
+            .survey-option-icon {
+                width: 18px;
+                height: 18px;
+            }
+
+            .success-icon svg {
+                width: 48px;
+                height: 48px;
+            }
+        }
+
+        /* Improved touch targets for mobile */
+        @media (hover: none) and (pointer: coarse) {
+            .survey-option label {
+                min-height: 48px;
+                padding: 1rem;
+            }
+
+            .survey-btn {
+                min-height: 48px;
+            }
+
+            .btn {
+                min-height: 48px;
+            }
+        }
+
+        /* Landscape mobile optimization */
+        @media (max-width: 768px) and (orientation: landscape) {
+            .form-header {
+                padding: 1rem;
+            }
+        }
+    </style>
+
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "rc565jpciz");
+    </script>
+    
+    <!-- Meta Pixel Code with Cross-Domain Tracking -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    
+    fbq('init', '1651771415513191', {
+      autoConfig: true,
+      xfbml: true
+    });
+    
+    fbq('set', 'autoConfig', true, '1651771415513191');
+    fbq('set', 'agent', 'tmgoogletagmanager');
+    
+    fbq('track', 'PageView');
+    </script>
+    <noscript>
+      <img height="1" width="1" style="display:none"
+           src="https://www.facebook.com/tr?id=1651771415513191&ev=PageView&noscript=1"/>
+    </noscript>
+    
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KF8XG2PT"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="container">
+        <div class="form-header">
+            <div class="logo-container">
+                <img src="https://cdn.shopify.com/s/files/1/0842/0933/6585/files/3VBtJCtx5KR74ureTaiHPHDUmps.avif?v=1745497220" alt="Enchantiya Logo" class="logo">
+            </div>
+            <h1 id="mainTitle">Помогни ни да станем по-добри!</h1>
+            <p id="mainSubtitle">От къде разбра за Enchantiya?</p>
+        </div>
+
+        <div class="form-container">
+            <!-- Survey Section (shown first) -->
+            <div class="survey-section" id="surveySection">
+                <div class="survey-container" id="surveyContainer">
+                    <div class="survey-header">
+                        <h3>🎯 Отговорът ти ще ни помогне да подобрим услугата си</h3>
+                        <p>Избери от къде разбра за нас и ще получиш детайлите за поръчката си.</p>
+                    </div>
+
+                    <form id="surveyForm">
+                        <div class="survey-options">
+                            <div class="survey-option">
+                                <input type="radio" id="facebook" name="source" value="Facebook">
+                                <label for="facebook">
+                                    <div class="survey-option-icon"></div>
+                                    <span>Facebook реклама</span>
+                                </label>
+                            </div>
+
+                            <div class="survey-option">
+                                <input type="radio" id="instagram" name="source" value="Instagram">
+                                <label for="instagram">
+                                    <div class="survey-option-icon"></div>
+                                    <span>Instagram реклама</span>
+                                </label>
+                            </div>
+
+                            <div class="survey-option">
+                                <input type="radio" id="google" name="source" value="Google">
+                                <label for="google">
+                                    <div class="survey-option-icon"></div>
+                                    <span>Google търсене</span>
+                                </label>
+                            </div>
+
+                            <div class="survey-option">
+                                <input type="radio" id="tiktok" name="source" value="TikTok">
+                                <label for="tiktok">
+                                    <div class="survey-option-icon"></div>
+                                    <span>TikTok реклама</span>
+                                </label>
+                            </div>
+
+                            <div class="survey-option">
+                                <input type="radio" id="youtube" name="source" value="YouTube">
+                                <label for="youtube">
+                                    <div class="survey-option-icon"></div>
+                                    <span>YouTube реклама</span>
+                                </label>
+                            </div>
+
+                            <div class="survey-option">
+                                <input type="radio" id="friend" name="source" value="Friend">
+                                <label for="friend">
+                                    <div class="survey-option-icon"></div>
+                                    <span>Приятел ми препоръча</span>
+                                </label>
+                            </div>
+
+                            <div class="survey-option">
+                                <input type="radio" id="other" name="source" value="Other">
+                                <label for="other">
+                                    <div class="survey-option-icon"></div>
+                                    <span>Друго</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="survey-other-container" id="otherContainer">
+                            <input type="text" class="survey-other-input" id="otherInput" placeholder="Моля, споделете от къде разбрахте за нас...">
+                        </div>
+
+                        <div class="survey-actions">
+                            <button type="submit" class="survey-btn survey-btn-primary">
+                                Изпрати отговор
+                            </button>
+                            <button type="button" class="survey-btn survey-btn-secondary" id="skipSurvey">
+                                Пропусни
+                            </button>
+                        </div>
+                    </form>
+
+                    <div class="survey-thank-you" id="surveyThankYou">
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Thank You Content (shown after survey) -->
+            <div class="thank-you-content" id="thankYouContent">
+                <div class="submission-success">
+                    <div class="success-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        </svg>
+                    </div>
+                    <div class="success-message">
+                        <h2>Поръчката е потвърдена</h2>
+                        <p>Получихме поръчката ти и ще започнем да я обработваме веднага. Ще получиш имейл потвърждение скоро с всички детайли за покупката ти.</p>
+                        <p>Ако имаш въпроси относно поръчката си, не се колебай да се свържеш с нас. - +359897858684</p>
+                    </div>
+                </div>
+
+                <div class="order-details">
+                    <h3>Какво следва?</h3>
+                    <ul>
+                        <li>
+                            <span>✓</span>
+                            <span>Ще получиш имейл потвърждение с детайлите на поръчката ти (провери и спам папката)</span>
+                        </li>
+                        <li>
+                            <span>✓</span>
+                            <span>Нашият екип ще прегледа поръчката ти и ще започне обработката</span>
+                        </li>
+                        <li>
+                            <span>✓</span>
+                            <span>Ще те информираме за напредъка на твоята персонализирана фигурка</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="form-navigation">
+                    <a href="https://enchantiya.com" class="btn">Върни се в началото</a>
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+    // Survey functionality - замести този код в HTML файла
+    document.addEventListener('DOMContentLoaded', function() {
+        const surveyForm = document.getElementById('surveyForm');
+        const otherRadio = document.getElementById('other');
+        const otherContainer = document.getElementById('otherContainer');
+        const otherInput = document.getElementById('otherInput');
+        const skipButton = document.getElementById('skipSurvey');
+        const surveySection = document.getElementById('surveySection');
+        const surveyThankYou = document.getElementById('surveyThankYou');
+        const thankYouContent = document.getElementById('thankYouContent');
+        const mainTitle = document.getElementById('mainTitle');
+        const mainSubtitle = document.getElementById('mainSubtitle');
+    
+        // Handle "Other" option
+        const radioButtons = document.querySelectorAll('input[name="source"]');
+        radioButtons.forEach(radio => {
+            radio.addEventListener('change', function() {
+                if (this.value === 'Other') {
+                    otherContainer.classList.add('active');
+                    otherInput.focus();
+                } else {
+                    otherContainer.classList.remove('active');
+                    otherInput.value = '';
+                }
+            });
+        });
+    
+        // Function to show thank you content
+        function showThankYouContent() {
+            // Update header
+            mainTitle.textContent = 'Благодарим за поръчката!';
+            mainSubtitle.textContent = 'Поръчката ти е потвърдена!';
+            
+            // Hide survey section and show thank you content immediately
+            surveySection.classList.add('hidden');
+            thankYouContent.classList.add('active');
+        }
+    
+        // Handle form submission
+        surveyForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const selectedSource = document.querySelector('input[name="source"]:checked');
+            if (!selectedSource) {
+                alert('Моля, изберете опция.');
+                return;
+            }
+    
+            let sourceValue = selectedSource.value;
+            let otherText = null;
+            
+            // Ако е избрано "Друго", проверяваме дали е въведен текст
+            if (sourceValue === 'Other') {
+                if (otherInput.value.trim()) {
+                    otherText = otherInput.value.trim();
+                } else {
+                    alert('Моля, въведете от къде разбрахте за нас.');
+                    otherInput.focus();
+                    return;
+                }
+            }
+    
+            // Track the survey response
+            if (typeof fbq !== 'undefined') {
+                fbq('trackCustom', 'SurveyCompleted', {
+                    source: sourceValue,
+                    otherText: otherText,
+                    page: 'thank_you'
+                });
+            }
+    
+            // Send survey response to survey.js с обновени данни
+            const surveyCompletedEvent = new CustomEvent('surveyCompleted', {
+                detail: {
+                    surveyResponse: sourceValue,
+                    otherText: otherText // Добавяме полето за custom текст
+                }
+            });
+            window.dispatchEvent(surveyCompletedEvent);
+    
+            // Show main thank you content immediately
+            showThankYouContent();
+    
+            // Optional: Send data to your backend
+            console.log('Survey response:', sourceValue, 'Other text:', otherText);
+        });
+    
+        // Handle skip button
+        skipButton.addEventListener('click', function() {
+            if (typeof fbq !== 'undefined') {
+                fbq('trackCustom', 'SurveySkipped', {
+                    page: 'thank_you'
+                });
+            }
+            
+            // Send survey skipped event to survey.js
+            const surveySkippedEvent = new CustomEvent('surveySkipped', {
+                detail: {
+                    surveyResponse: 'skipped'
+                }
+            });
+            window.dispatchEvent(surveySkippedEvent);
+            
+            // Show thank you content immediately when skipped
+            showThankYouContent();
+        });
+    });
+    </script>
+    <script src="/js/confirm-order/confirmorder.js""></script>
+    <script src="/js/confirm-order/thank-you-survey.js"></script>
+</body>
+</html>
