@@ -24,3 +24,17 @@ export async function trackOrder(formData) {
         body: formData
     });
 }
+
+export async function validatePromoCode(code) {
+    const res = await fetch('https://n8n.enchantiya.com/webhook/6087e7b2-4948-4609-8338-956feb224b51', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ code })
+    });
+    if (!res.ok) {
+        throw new Error('Network error');
+    }
+    return res.json();
+}

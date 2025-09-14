@@ -1,7 +1,8 @@
 import { formData } from '../data.js';
 import { validateEmail, validatePhone } from '../utils/validators.js';
 import { showError, hideError, scrollToError } from '../utils/dom.js';
-import { postOrder } from '../utils/api.js';
+import { postOrder, validatePromoCode } from '../utils/api.js';
+import { updateTotalPrice } from '../utils/payment.js';
 
 
 export function initStep4() {
@@ -10,12 +11,95 @@ export function initStep4() {
   const submissionLoading = document.getElementById('submissionLoading');
   const submissionSuccess = document.getElementById('submissionSuccess');
   const submissionError = document.getElementById('submissionError');
+  const promoInput = document.getElementById('promoCodeInput');
+  const applyPromoBtn = document.getElementById('applyPromoBtn');
+  const promoError = document.getElementById('promoError');
+  const promoFeedback = document.getElementById('promoFeedback');
 
   const fields = ['fullName', 'email', 'phone', 'address', 'country', 'city', 'postcode'];
   fields.forEach(field => {
     const input = document.getElementById(field);
     input.addEventListener('input', () => formData.contact[field] = input.value);
   });
+
+  // Prefill promo code if already set
+  if (promoInput && formData.promo && formData.promo.code) {
+    promoInput.value = formData.promo.code;
+  }
+
+  async function handleApplyPromo() {
+    if (!promoInput) return;
+    const code = (promoInput.value || '').trim();
+    if (!code) {
+      if (promoError) {
+        promoError.style.display = 'block';
+        promoError.textContent = 'Моля, въведете промо код.';
+      }
+      if (promoFeedback) promoFeedback.style.display = 'none';
+      formData.promo = { code: '', percentOff: 0, isValid: false };
+      updateTotalPrice();
+      return;
+    }
+    // loading state
+    if (applyPromoBtn) {
+      applyPromoBtn.disabled = true;
+      applyPromoBtn.textContent = 'Проверка...';
+    }
+    if (promoError) {
+      promoError.style.display = 'none';
+      promoError.textContent = '';
+    }
+    if (promoFeedback) {
+      promoFeedback.style.display = 'none';
+      promoFeedback.textContent = '';
+    }
+    try {
+      const result = await validatePromoCode(code);
+      // Expecting { status: true, off: 15 }
+      const isValid = !!result && (result.status === true || result.status === 'true');
+      const percentOff = isValid ? parseFloat(result.off) || 0 : 0;
+      if (isValid && percentOff > 0) {
+        formData.promo.code = code;
+        formData.promo.percentOff = percentOff;
+        formData.promo.isValid = true;
+        if (promoFeedback) {
+          promoFeedback.style.display = 'block';
+          promoFeedback.textContent = `Успешно приложен промо код: -${percentOff}%`;
+        }
+      } else {
+        formData.promo = { code: '', percentOff: 0, isValid: false };
+        if (promoError) {
+          promoError.style.display = 'block';
+          promoError.textContent = 'Невалиден промо код.';
+        }
+      }
+    } catch (e) {
+      console.error('Promo validation error', e);
+      formData.promo = { code: '', percentOff: 0, isValid: false };
+      if (promoError) {
+        promoError.style.display = 'block';
+        promoError.textContent = 'Грешка при проверка на промо кода. Опитайте отново.';
+      }
+    } finally {
+      if (applyPromoBtn) {
+        applyPromoBtn.disabled = false;
+        applyPromoBtn.textContent = 'Приложи';
+      }
+      updateTotalPrice();
+    }
+  }
+
+  if (applyPromoBtn) {
+    applyPromoBtn.addEventListener('click', handleApplyPromo);
+  }
+  if (promoInput) {
+    promoInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        handleApplyPromo();
+      }
+    });
+  }
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -70,6 +154,10 @@ export function initStep4() {
     fd.append('clothesDescription', formData.clothesDescription);
     fd.append('size', formData.size);
     fd.append('price', formData.price);
+    // In case backend needs final discount info explicitly
+    if (formData.promo && formData.promo.isValid) {
+      fd.append('priceDiscounted', String(formData.price));
+    }
     fd.append('packageType', formData.packageType);
     fd.append('packagePrice', formData.packagePrice);
     fd.append('orderSpeed', formData.orderSpeed);
@@ -94,6 +182,11 @@ export function initStep4() {
     }
     fd.append('currency', formData.currency);
     fd.append('paymentType', formData.paymentType);
+    // Promo fields
+    if (formData.promo && formData.promo.isValid) {
+      fd.append('promoCode', formData.promo.code);
+      fd.append('promoPercentOff', String(formData.promo.percentOff));
+    }
     formData.affiliate = getCookieValue('referrer');
 
     if (formData.affiliate) {

@@ -31,5 +31,10 @@ export const formData = {
         city: '',
         postcode: ''
     },
-    affiliate:''
+    affiliate:'',
+    promo: {
+        code: '',
+        percentOff: 0,
+        isValid: false
+    }
 };

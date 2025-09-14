@@ -4,6 +4,7 @@ import { getUserIP, postToPreviewAPI } from '../utils/api.js';
 import { compressBase64Image } from '../utils/compressimage.js';
 import { setBasePrice, updateTotalPrice } from '../utils/payment.js';
 import { formatPrice } from '../utils/currency.js';
+import { config } from '../config.js';
 
 
 let isPreviewGenerated = false;
@@ -40,6 +41,31 @@ export function initStep3() {
   const premiumInfoBtn = document.getElementById('premiumInfoBtn');
   const premiumModal = document.getElementById('premiumModal');
   const closePremiumModal = document.getElementById('closePremiumModal');
+
+  // Enforce priority-order flag on UI and state
+  function enforcePriorityFlag() {
+    try {
+      const fastEl = document.querySelector('.speed-option[data-type="fast"]');
+      const stdEl = document.querySelector('.speed-option[data-type="standard"]');
+      if (!config.enablePriorityOrder) {
+        // Hide fast option entirely
+        if (fastEl) fastEl.style.display = 'none';
+        // Force-select standard in UI and state
+        if (stdEl) {
+          document.querySelectorAll('.speed-option').forEach(p => p.classList.remove('selected'));
+          stdEl.classList.add('selected');
+        }
+        formData.orderSpeed = 'standard';
+        formData.orderSpeedPrice = 0;
+        updateTotalPrice();
+      } else {
+        // Show fast option when enabled
+        if (fastEl) fastEl.style.display = '';
+      }
+    } catch (e) {
+      // no-op if DOM not ready
+    }
+  }
 
   function computeAdjustedSizePrice(basePrice) {
     const count = formData.peopleCount || 1;
@@ -185,9 +211,12 @@ export function initStep3() {
     el.addEventListener('click', () => {
       const type = el.getAttribute('data-type');
       const price = parseFloat(el.getAttribute('data-price')) || 0;
+      if (!config.enablePriorityOrder && type === 'fast') return;
       selectSpeed(type, price);
     });
   });
+  // Apply flag after listeners are set
+  enforcePriorityFlag();
   if (premiumInfoBtn && premiumModal && closePremiumModal) {
     premiumInfoBtn.addEventListener('click', () => {
       premiumModal.style.display = 'flex';

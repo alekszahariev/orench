@@ -495,8 +495,16 @@
                         </div>
                     </fieldset>
 
-                    
-
+                    <!-- Promo code -->
+                    <div class="form-group" id="promoGroup">
+                        <label for="promoCodeInput">Промо код</label>
+                        <div class="promo-input-row">
+                            <input type="text" id="promoCodeInput" placeholder="Въведете промо код">
+                            <button type="button" class="btn" style="margin-top: 10px;" id="applyPromoBtn">Приложи</button>
+                        </div>
+                        <div class="error-message" id="promoError" style="display:none;"></div>
+                        <div class="promo-feedback" id="promoFeedback" style="display:none;"></div>
+                    </div>
 
                     <!-- Payment Method -->
 
@@ -530,6 +538,7 @@
                             <span class="total-label">Обща Цена:</span>
                             <span class="total-amount" id="totalAmount">0.00 </span>
                         </div>
+                        <div class="promo-summary" id="promoSummary" style="display:none;"></div>
 
 
 

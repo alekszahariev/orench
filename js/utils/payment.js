@@ -75,6 +75,7 @@ export function selectPaymentMethod(method) {
 export function updateTotalPrice() {
     const totalBox = document.getElementById('totalPriceBox');
     const totalAmount = document.getElementById('totalAmount');
+    const promoSummary = document.getElementById('promoSummary');
 
     if (!totalAmount) {
         console.error('Total amount element not found');
@@ -96,6 +97,14 @@ export function updateTotalPrice() {
     const pkg = parseFloat(formData.packagePrice || 0) || 0;
     const speed = parseFloat(formData.orderSpeedPrice || 0) || 0;
     finalPrice += pkg + speed;
+
+    // Apply promo discount (percent off) before COD fee
+    let discountAmount = 0;
+    if (formData.promo && formData.promo.isValid && formData.promo.percentOff > 0) {
+        const percent = Math.min(100, Math.max(0, parseFloat(formData.promo.percentOff)));
+        discountAmount = (finalPrice * percent) / 100;
+        finalPrice -= discountAmount;
+    }
     if (isCodSelected || formData.paymentType === 'cod') {
         finalPrice += COD_FEE;
     }
@@ -106,6 +115,20 @@ export function updateTotalPrice() {
     // Update UI
     const eur = (finalPrice/1.95583).toFixed(2);
     totalAmount.textContent = `${finalPrice.toFixed(2)} ${getCurrencySymbol()} ( €${eur} )`;
+
+    // Update promo summary UI if present
+    if (promoSummary) {
+        if (discountAmount > 0) {
+            const percent = formData.promo.percentOff;
+            const bgn = discountAmount.toFixed(2);
+            const eurDisc = (discountAmount/1.95583).toFixed(2);
+            promoSummary.style.display = 'block';
+            promoSummary.textContent = `Промо -${percent}%: −${bgn} ${getCurrencySymbol()} ( €${eurDisc} )`;
+        } else {
+            promoSummary.style.display = 'none';
+            promoSummary.textContent = '';
+        }
+    }
 
     // Update bottom CTA button with real-time price
     const jumpBtn = document.getElementById('btnJumpSubmit');
