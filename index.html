@@ -2,6 +2,19 @@
 <html lang="bg">
 
 <head>
+    <script>
+    (function(){
+        try {
+            // Random 1..100; >50 goes to v2
+            var roll = Math.floor(Math.random() * 100) + 1;
+            if (roll > 50) {
+                var qs = window.location.search || '';
+                var hash = window.location.hash || '';
+                window.location.replace('/v2/index.html' + qs + hash);
+            }
+        } catch (e) {}
+    })();
+    </script>
     <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-QDBQ7RMV6L"></script>
 <script>

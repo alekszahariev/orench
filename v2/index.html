@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Поръчка на фигура — V2 (без визуализация)</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+    <div class="container">
+        <header class="form-header">
+            <div class="logo-container">
+                <img src="https://cdn.shopify.com/s/files/1/0842/0933/6585/files/3VBtJCtx5KR74ureTaiHPHDUmps.avif?v=1745497220" alt="Logo" class="logo">
+            </div>
+        </header>
+
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-steps">
+                <div class="step-indicator active" data-step="1">
+                    <div class="step-dot">1</div>
+                    <div class="step-label">Снимки</div>
+                </div>
+                <div class="step-indicator" data-step="2">
+                    <div class="step-dot">2</div>
+                    <div class="step-label">Размер & Опции</div>
+                </div>
+                <div class="step-indicator" data-step="3">
+                    <div class="step-dot">3</div>
+                    <div class="step-label">Контакти & Плащане</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-container">
+            <form id="figureFormV2">
+                <!-- Step 1: Photos -->
+                <div class="form-step active" id="step1">
+                    <h2>Качете снимки за вашата фигура</h2>
+
+                    <div class="people-counter" id="peopleCounter">
+                        <label>Колко души да има във фигурката?</label>
+                        <div class="counter-control">
+                            <button type="button" id="peopleMinus" class="counter-button" aria-label="Минус">−</button>
+                            <span id="peopleValue" class="counter-value">1</span>
+                            <button type="button" id="peoplePlus" class="counter-button" aria-label="Плюс">+</button>
+                        </div>
+                    </div>
+
+                    <div id="photosContainer" class="multi-photo-grid"></div>
+                    <div class="error-message" id="photoError"></div>
+
+                    
+
+                    <div class="form-navigation">
+                        <button type="button" class="btn btn-next" id="step1Next">Напред</button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Size, Package, Delivery -->
+                <div class="form-step" id="step2">
+                    <h2>Изберете размер и опции</h2>
+
+                    <div class="form-group">
+                        <label>Изберете размер</label>
+                        <div class="size-options-step3"></div>
+                        <div class="error-message" id="sizeErrorStep3"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Опаковка</label>
+                        <div class="package-options">
+                            <div class="package-option selected" data-type="basic" data-price="0">
+                                <img src="../assets/basic-box_selection.jpg" alt="Basic">
+                                <h4>Обикновенна кутия</h4>
+                                <p>0.00 лв. <span style="color:#666">(€0.00)</span></p>
+                            </div>
+                            <div class="package-option" data-type="premium" data-price="9.90" data-available="false">
+                                <div class="package-header">
+                                    <img src="../assets/premium_box_selection.jpg" alt="Premium box">
+                                    <button type="button" class="info-button" id="premiumInfoBtn">?</button>
+                                </div>
+                                <h4>Луксозна кутия</h4>
+                                <p>9.90 лв. <span style="color:#666">(€5.06)</span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Срок на изработка</label>
+                        <div class="speed-options">
+                            <div class="speed-option selected" data-type="standard" data-price="0">
+                                <h4>Стандартна поръчка</h4>
+                                <p>10-15 дни — 0.00 лв. <span style="color:#666">(€0.00)</span></p>
+                            </div>
+                            <div class="speed-option" data-type="fast" data-price="35.00">
+                                <h4>Експресна поръчка</h4>
+                                <p>до 5 дни — 35.00 лв. <span style="color:#666">(€17.90)</span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-box" id="premiumModal">
+                        <div class="modal-content">
+                            <h3>Подаръчна кутия</h3>
+                            <p>Луксозна опаковка, подходяща за подарък. Включва специална кутия. На гърба може да напишете вашето пожелание. *Ще имате нужда от маркер.</p>
+                            <button type="button" class="btn" id="closePremiumModal">Затвори</button>
+                        </div>
+                    </div>
+
+                    <div class="form-navigation">
+                        <button type="button" class="btn btn-prev" data-step="1">Назад</button>
+                        <button type="button" class="btn btn-next" id="step2NextV2">Напред</button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Contact & Payment -->
+                <div class="form-step" id="step3">
+                    <h2>Контакт & Доставка</h2>
+
+                    <div class="info-banner" style="background:#f3f4f6;border:1px solid #e5e7eb;border-radius:8px;padding:12px 14px;margin-bottom:16px;display:flex;gap:10px;align-items:center;">
+                        <i class="fa-brands fa-viber" style="color:#7c5cff;font-size:20px"></i>
+                        <div style="font-size:14px;color:#111">
+                            Наш колега ще се свърже с вас по Viber, за да получите визуализация на фигурката преди изработка. (В работно време от 09:00 до 18:00 Пон-Съб.)
+                        </div>
+                    </div>
+
+                    <fieldset class="customer-info">
+                        <legend>Контактна информация</legend>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="fullName">Пълно име</label>
+                                <input type="text" id="fullName" placeholder="Пълно име">
+                                <div class="error-message" id="fullNameError"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Имейл адрес</label>
+                                <input type="email" id="email" placeholder="Имейл адрес">
+                                <div class="error-message" id="emailError"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Телефонен номер</label>
+                                <input type="tel" id="phone" placeholder="Телефонен номер">
+                                <div class="error-message" id="phoneError"></div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="delivery-info">
+                        <legend>Адрес за доставка</legend>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="address">Адрес / офис на Еконт</label>
+                                <input type="text" id="address" placeholder="Адрес / офис на Еконт">
+                                <div class="error-message" id="addressError"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="country" style="display:none;">Държава</label>
+                                <input type="text" id="country" value="bg" style="display:none;">
+                                <div class="error-message" id="countryError"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="city">Град</label>
+                                <input type="text" id="city" placeholder="Град">
+                                <div class="error-message" id="cityError"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="postcode">Пощенски код</label>
+                                <input type="text" id="postcode" placeholder="Пощенски код">
+                                <div class="error-message" id="postcodeError"></div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <div class="form-group" id="promoGroup">
+                        <label for="promoCodeInput">Промо код</label>
+                        <div class="promo-input-row">
+                            <input type="text" id="promoCodeInput" placeholder="Въведете промо код">
+                            <button type="button" class="btn" style="margin-top: 10px;" id="applyPromoBtn">Приложи</button>
+                        </div>
+                        <div class="error-message" id="promoError" style="display:none;"></div>
+                        <div class="promo-feedback" id="promoFeedback" style="display:none;"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="hidden" id="selectedPaymentMethod" name="payment_method" value="card">
+                        <label for="selectMethod">Начин на Плащане</label>
+                        <div class="payment-options">
+                            <div class="payment-option" id="paymentCard" onclick="selectPaymentMethod('card')">
+                                <i class="fas fa-credit-card fa-2x"></i>
+                                <h3>Карта</h3>
+                                <p>Плати с дебитна или кредитна карта</p>
+                            </div>
+                            <div class="payment-option" id="paymentCOD" onclick="selectPaymentMethod('cod')">
+                                <div class="payment-header">
+                                    <i class="fas fa-money-bill-wave fa-2x"></i>
+                                    <div class="tooltip-container">
+                                        <i class="fas fa-question-circle tooltip-icon"></i>
+                                        <div class="tooltip-text">Работим ръчно и с много сърце. Ако някой не вземе пратката си, всичко отива на вятъра. Таксата е, за да избегнем това.</div>
+                                    </div>
+                                </div>
+                                <h3>Наложен платеж + 19.90 лв.</h3>
+                                <p>Плати при доставка</p>
+                            </div>
+                            <div class="error-message" id="paymentError"></div>
+                        </div>
+
+                        <div class="total-price-box" id="totalPriceBox">
+                            <span class="total-label">Обща Цена:</span>
+                            <span class="total-amount" id="totalAmount">0.00 </span>
+                        </div>
+                        <div class="promo-summary" id="promoSummary" style="display:none;"></div>
+
+                        <div class="form-navigation">
+                            <button type="button" class="btn btn-prev" data-step="2">Назад</button>
+                            <button type="submit" class="btn btn-submit" id="submitFormV2">Изпрати поръчка</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div class="submission-container" style="display:none;" id="submissionContainerV2">
+                <div class="submission-loading" id="submissionLoadingV2">
+                    <div class="spinner"></div>
+                    <p>Обработка на вашата поръчка...</p>
+                </div>
+                <div class="submission-success" id="submissionSuccessV2" style="display:none;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="success-icon"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                    <h2>Поръчката е изпратена успешно!</h2>
+                    <p>Благодарим за поръчката. Скоро ще се свържем с вас с повече детайли.</p>
+                </div>
+                <div class="submission-error" id="submissionErrorV2" style="display:none;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="error-icon"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+                    <h2>Нещо се обърка</h2>
+                    <p id="errorMessageV2">Възникна грешка при изпращането на поръчката. Моля, опитайте отново.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="/v2/js/main.js"></script>
+    
+</body>
+</html>
+
+

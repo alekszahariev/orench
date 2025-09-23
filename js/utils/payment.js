@@ -76,6 +76,8 @@ export function updateTotalPrice() {
     const totalBox = document.getElementById('totalPriceBox');
     const totalAmount = document.getElementById('totalAmount');
     const promoSummary = document.getElementById('promoSummary');
+    const floatingBar = null;
+    const floatingAmount = null;
 
     if (!totalAmount) {
         console.error('Total amount element not found');
@@ -87,6 +89,7 @@ export function updateTotalPrice() {
         if (totalBox) {
             totalBox.style.display = 'none';
         }
+        
         console.warn('[updateTotalPrice] Invalid base price:', basePrice);
         return;
     }
@@ -115,6 +118,7 @@ export function updateTotalPrice() {
     // Update UI
     const eur = (finalPrice/1.95583).toFixed(2);
     totalAmount.textContent = `${finalPrice.toFixed(2)} ${getCurrencySymbol()} ( €${eur} )`;
+    
 
     // Update promo summary UI if present
     if (promoSummary) {
@@ -135,9 +139,8 @@ export function updateTotalPrice() {
     if (jumpBtn) {
         jumpBtn.textContent = `Завършете Поръчката си — ${finalPrice.toFixed(2)} ${getCurrencySymbol()} ( €${eur} )`;
     }
-    if (totalBox) {
-        totalBox.style.display = 'flex';
-    }
+    if (totalBox) totalBox.style.display = 'flex';
+    
 
 }
 
