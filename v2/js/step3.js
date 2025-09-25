@@ -101,27 +101,80 @@ export function initStep3V2() {
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const validators = {
-      email: validateEmail(formData.contact.email),
-      phone: validatePhone(formData.contact.phone)
+    // 1) Validate photos (Step 1)
+    const hasRequiredPhotos = Array.isArray(formData.personPhotos)
+      && formData.personPhotos.slice(0, formData.peopleCount || 1).every(p => p && p.file);
+    if (!hasRequiredPhotos) {
+      const photoError = document.getElementById('photoError');
+      if (photoError) {
+        showError(photoError, 'Моля, качете снимка за всеки човек.');
+        goToStep(1);
+        scrollToError(photoError);
+      }
+      return;
+    }
+
+    // 2) Validate size selection (Step 2)
+    if (!formData.size) {
+      const sizeErr = document.getElementById('sizeErrorStep3');
+      if (sizeErr) {
+        showError(sizeErr, 'sizeError');
+        goToStep(2);
+        scrollToError(sizeErr);
+      }
+      return;
+    }
+
+    // 3) Validate payment method (Step 3)
+    if (!formData.paymentType) {
+      const payErr = document.getElementById('paymentError');
+      if (payErr) {
+        showError(payErr, 'paymentTypeError');
+        scrollToError(payErr);
+      }
+      return;
+    }
+
+    // 4) Validate contact fields (Step 3)
+    const contactErrorKeys = {
+      fullName: 'nameError',
+      email: 'emailError',
+      phone: 'phoneError',
+      address: 'addressError',
+      country: 'countryError',
+      city: 'cityError',
+      postcode: 'postcodeError'
     };
 
-    let valid = true;
-    fields.forEach(field => {
-      const val = formData.contact[field];
-      const errorEl = document.getElementById(field + 'Error');
-      if (!val || (validators[field] === false)) {
-        showError(errorEl, field + 'Error');
-        if (valid) scrollToError(errorEl);
-        valid = false;
+    let firstErrorEl = null;
+    let hasContactError = false;
+
+    Object.keys(contactErrorKeys).forEach((field) => {
+      const raw = (formData.contact[field] || '').trim();
+      let isValidField = true;
+
+      if (field === 'email') {
+        isValidField = validateEmail(raw);
+      } else if (field === 'phone') {
+        const normalized = validatePhone(raw);
+        isValidField = !!normalized;
+        if (normalized) formData.contact.phone = normalized;
       } else {
+        isValidField = !!raw;
+      }
+
+      const errorEl = document.getElementById(field + 'Error');
+      if (!isValidField) {
+        showError(errorEl, contactErrorKeys[field]);
+        if (!firstErrorEl) firstErrorEl = errorEl;
+        hasContactError = true;
+      } else if (errorEl) {
         hideError(errorEl);
       }
     });
 
-    if (!formData.size || !formData.paymentType) {
-      showError(document.getElementById('sizeErrorStep3'), 'sizeError');
-      showError(document.getElementById('paymentError'), 'paymentTypeError');
+    if (hasContactError) {
+      if (firstErrorEl) scrollToError(firstErrorEl);
       return;
     }
 
